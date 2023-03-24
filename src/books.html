@@ -4,27 +4,39 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <title>Library Tailwind</title>
+    <link
+      href="https://assets.website-files.com/61af164800e38c4f53c60b4e/61af164800e38cd504c60bad_RevoU%20favicon.svg"
+      rel="shortcut icon"
+      type="image/x-icon"
+    />
+    <link
+      href="https://assets.website-files.com/61af164800e38c4f53c60b4e/61af164800e38c10e6c60bac_RevoU%20centered.svg"
+      rel="apple-touch-icon"
+    />
 
     <link href="/dist/output.css" rel="stylesheet" />
   </head>
-  <body onload="loadbooks()">
+  <body onload="loadBooks()">
     <div class="flex flex-col h-screen">
       <header>
         <nav class="bg-gray-800">
-          <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div class="relative flex h-16 items-center justify-between">
+          <div class="mx-auto max-w-7xl px-2 py-4 sm:px-6 lg:px-8">
+            <div
+              class="flex items-center justify-center relative sm:justify-start"
+            >
               <div
                 class="absolute inset-y-0 left-0 flex items-center sm:hidden"
               >
                 <button
                   id="m-menu-button"
                   type="button"
-                  class="inline-flex focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                   aria-controls="mobile-menu"
                   aria-expanded="false"
-                  onclick="toggleMobileMenu()"
+                  onclick="toggleMenuButton()"
+                  class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white"
                 >
                   <span class="sr-only">Open main menu</span>
                   <!-- closed menu -->
@@ -34,6 +46,7 @@
                     stroke-width="1.5"
                     stroke="currentColor"
                     aria-hidden="true"
+                    class="block h-8 w-8"
                   >
                     <path
                       stroke-linecap="round"
@@ -48,6 +61,7 @@
                     stroke-width="1.5"
                     stroke="currentColor"
                     aria-hidden="true"
+                    class="hidden h-8 w-8"
                   >
                     <path
                       stroke-linecap="round"
@@ -57,34 +71,34 @@
                   </svg>
                 </button>
               </div>
-              <div
-                class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
-              >
-                <div class="flex flex-shrink-0 items-center">
+
+              <div class="flex items-center justify-center">
+                <div class="flex items-center">
                   <img
-                    class="hidden h-8 w-auto lg:block"
                     src="https://assets.website-files.com/61af164800e38c4f53c60b4e/61af164800e38c11efc60b6d_RevoU.svg"
                     alt="RevoU Library"
+                    class="block h-8 w-auto"
                   />
                 </div>
+
                 <div class="hidden sm:ml-6 sm:block">
-                  <div class="flex space-x-4">
+                  <div class="flex space-x-4 text-gray-400 text-sm font-medium">
                     <a
                       href="index.html"
-                      class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                       aria-current="page"
+                      class="px-3 py-2 rounded-md transition-all hover:bg-gray-700 hover:text-white"
                       >Library</a
                     >
 
                     <a
                       href="books.html"
-                      class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                      class="px-3 py-2 rounded-md bg-gray-900 text-white"
                       >Books</a
                     >
 
                     <a
                       href="information.html"
-                      class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                      class="px-3 py-2 rounded-md transition-all hover:bg-gray-700 hover:text-white"
                       >Information</a
                     >
                   </div>
@@ -93,24 +107,26 @@
             </div>
           </div>
 
-          <div class="sm:hidden hidden" id="m-menu">
-            <div class="space-y-1 px-2 pt-2 pb-3">
+          <div id="m-menu" class="hidden sm:hidden">
+            <div
+              class="flex flex-col gap-1 px-2 py-2 text-gray-400 text-base font-medium"
+            >
               <a
                 href="index.html"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
                 aria-current="page"
+                class="px-3 py-2 rounded-md transition-all hover:bg-gray-700 hover:text-white"
                 >Library</a
               >
 
               <a
                 href="books.html"
-                class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
+                class="px-3 py-2 rounded-md bg-gray-900 text-white"
                 >Books</a
               >
 
               <a
                 href="information.html"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                class="px-3 py-2 rounded-md transition-all hover:bg-gray-700 hover:text-white"
                 >Information</a
               >
             </div>
@@ -120,12 +136,72 @@
       <main
         class="flex-1 overflow-y-auto bg-library-2 bg-cover bg-center bg-no-repeat"
       >
-        Books
+        <div class="flex flex-col items-center py-3 px-4 sm:px-8">
+          <div
+            class="container mx-auto my-3 max-w-screen-xl sm:px-6 lg:px-8 bg-gray-800 rounded-lg py-8"
+          >
+            <div class="text-center">
+              <button
+                class="bg-white border-2 border-gray-400 rounded-md p-2"
+                onclick="previous()"
+              >
+                Previous
+              </button>
+              <button
+                class="bg-white border-2 border-gray-400 rounded-md p-2"
+                onclick="first()"
+              >
+                1
+              </button>
+              <button
+                class="bg-white border-2 border-gray-400 rounded-md p-2"
+                onclick="second()"
+              >
+                2
+              </button>
+              <button
+                class="bg-white border-2 border-gray-400 rounded-md p-2"
+                onclick="next()"
+              >
+                Next
+              </button>
+            </div>
+
+            <div
+              id="book-grid"
+              class="my-6 grid grid-cols-1 lg:grid-cols-4 sm:grid-cols-3 gap-4 px-4 sm:px-0"
+            ></div>
+            <div class="text-center">
+              <button
+                class="bg-white border-2 border-gray-400 rounded-md p-2"
+                onclick="previous()"
+              >
+                Previous
+              </button>
+              <button
+                class="bg-white border-2 border-gray-400 rounded-md p-2"
+                onclick="first()"
+              >
+                1
+              </button>
+              <button
+                class="bg-white border-2 border-gray-400 rounded-md p-2"
+                onclick="second()"
+              >
+                2
+              </button>
+              <button
+                class="bg-white border-2 border-gray-400 rounded-md p-2"
+                onclick="next()"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
       </main>
-      <footer class="py-3 bg-gray-800">
-        <p class="text-center text-xs leading-relaxed text-gray-300">
-          RevoU Library
-        </p>
+      <footer class="bg-gray-800 py-4">
+        <p class="text-center text-xs text-gray-300">RevoU Library</p>
       </footer>
     </div>
     <script src="app.js"></script>
