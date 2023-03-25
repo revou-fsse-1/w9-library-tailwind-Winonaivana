@@ -2,61 +2,55 @@ function getPageFromUrl() {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
 
-  let page = urlParams.get("page");
+  let page = urlParams.get('page');
 
   return page;
 }
 
 async function getBooksData() {
-  let response = await fetch("./data.json");
+  let response = await fetch('./data.json');
   let json = await response.json();
-  return json["books"];
+  return json['books'];
 }
 
 function toggleMenuButton() {
-  const menu = document.getElementById("m-menu");
-  const buttonChildren = document.getElementById("m-menu-button").children;
+  const menu = document.getElementById('m-menu');
+  const buttonChildren = document.getElementById('m-menu-button').children;
 
-  if (menu.classList.contains("hidden")) {
-    menu.classList.replace("hidden", "block");
-    buttonChildren[1].classList.replace("block", "hidden");
-    buttonChildren[2].classList.replace("hidden", "block");
+  if (menu.classList.contains('hidden')) {
+    menu.classList.replace('hidden', 'block');
+    buttonChildren[1].classList.replace('block', 'hidden');
+    buttonChildren[2].classList.replace('hidden', 'block');
   } else {
-    menu.classList.replace("block", "hidden");
-    buttonChildren[1].classList.replace("hidden", "block");
-    buttonChildren[2].classList.replace("block", "hidden");
+    menu.classList.replace('block', 'hidden');
+    buttonChildren[1].classList.replace('hidden', 'block');
+    buttonChildren[2].classList.replace('block', 'hidden');
   }
 }
 
-const searchForm = document.getElementById("search-form");
-const searchResult = document.getElementById("search-result");
+const searchForm = document.getElementById('search-form');
+const searchResult = document.getElementById('search-result');
 
 async function searchBooks(e) {
   e.preventDefault();
 
   const books = await getBooksData();
-  const value = document.getElementById("search").value.toLowerCase();
+  const value = document.getElementById('search').value.toLowerCase();
 
-  if (value.length < 2) {
-    searchResult.innerHTML = "";
-    searchResult.classList.add("hidden");
-  } else {
-    searchResult.innerHTML = "";
-    searchResult.classList.remove("hidden");
-
-    books.forEach((book) => {
-      const title = book.title.toLowerCase();
-      const authors = book.authors.join(", ").toLowerCase();
-      const subjects = book.subjects.join(", ").toLowerCase();
-
-      if (
-        title.includes(value) ||
-        authors.includes(value) ||
-        subjects.includes(value)
-      ) {
+  if (value.length > 0) {
+    searchResult.innerHTML = '';
+    searchResult.classList.remove('hidden');
+    let filtered = books.filter(
+      (book) =>
+        book['title'].toLowerCase().includes(value) ||
+        book['authors'].join(', ').toLowerCase().includes(value) ||
+        book['subjects'].join(', ').toLowerCase().includes(value)
+    );
+    if (filtered.length > 0) {
+      filtered.forEach((book) => {
         searchResult.innerHTML += `
-          <div class="flex md:flex-row flex-col  items-center bg-white border border-gray-200 p-4 shadow md:flex-row hover:bg-gray-100 ">
-            <a href="#" class="flex flex-col items-center mx-4 md:flex-row">
+          <div class="flex flex-col  items-center bg-white border border-gray-200 p-4 shadow md:flex-row hover:bg-gray-100 ">
+            <a href="#" class="flex flex-col items-center mx-4  md:flex-row">
               <img class="object-cover w-full rounded-lg h-96 md:h-auto md:w-24" src="${
                 book.image
               }"  />
@@ -66,26 +60,30 @@ async function searchBooks(e) {
                 }</h4>
                 <p class=""mb-3 font-normal">
                   <strong>Author(s): </strong>
-                  ${book.authors.join(", ")}
+                  ${book.authors.join(', ')}
                 </p>
               </div>
             </a>
           </div>
         `;
-      }
-    });
+      });
+    } else {
+      searchResult.innerHTML = `
+     <p class="text-gray-400 text-center">No books found, please try with another keyword<p>
+      `;
+    }
   }
 }
 
 function func() {
-  searchForm.addEventListener("submit", searchBooks);
+  searchForm.addEventListener('submit', searchBooks);
 }
 
-const bookgrid = document.getElementById("book-grid");
+const bookgrid = document.getElementById('book-grid');
 
 async function loadBooks() {
   var e = window.location.search;
-  let o = new URLSearchParams(e).get("page");
+  let o = new URLSearchParams(e).get('page');
   o = o ? Number(o) : 1;
   const books = await getBooksData();
 
@@ -100,7 +98,7 @@ async function loadBooks() {
                 }</h4>
                 <p class="mb-2 text-gray-500">
                   <strong>Author(s): </strong>
-                  ${book.authors.join(", ")}
+                  ${book.authors.join(', ')}
                 </p>
               </div>
             </a>
@@ -110,21 +108,21 @@ async function loadBooks() {
 }
 function previous() {
   var e = window.location.search,
-    e = new URLSearchParams(e).get("page");
-  e && "2" == e ? window.location.replace("?page=1") : window.location.reload();
+    e = new URLSearchParams(e).get('page');
+  e && '2' == e ? window.location.replace('?page=1') : window.location.reload();
 }
 function next() {
   var e = window.location.search,
-    e = new URLSearchParams(e).get("page");
-  e && "1" == e ? window.location.replace("?page=2") : window.location.reload();
+    e = new URLSearchParams(e).get('page');
+  e && '1' == e ? window.location.replace('?page=2') : window.location.reload();
 }
 
 function first() {
-  window.location.href = "?page=1";
+  window.location.href = '?page=1';
 }
 
 function second() {
-  window.location.href = "?page=2";
+  window.location.href = '?page=2';
 }
 
 /**

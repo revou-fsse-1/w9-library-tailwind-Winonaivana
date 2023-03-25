@@ -18,7 +18,7 @@
 
     <link href="/dist/output.css" rel="stylesheet" />
   </head>
-  <body onload="func()">
+  <body>
     <div class="flex flex-col h-screen">
       <header>
         <nav class="bg-gray-800">
@@ -156,6 +156,7 @@
                 />
                 <button
                   type="submit"
+                  onclick="func()"
                   class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Search
@@ -165,7 +166,7 @@
           </div>
           <div
             id="search-result"
-            class="container mx-auto my-3 max-w-screen-md sm:px-6 lg:px-8 bg-gray-800 rounded-lg py-4 hidden"
+            class="container mx-auto my-3 max-w-screen-md sm:px-6 lg:px-8 bg-gray-800 rounded-lg py-8 hidden"
           ></div>
         </div>
       </main>
