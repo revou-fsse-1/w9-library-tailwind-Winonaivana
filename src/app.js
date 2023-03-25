@@ -91,7 +91,7 @@ async function loadBooks() {
 
   books.slice(12 * (o - 1), 12 * o).forEach((book) => {
     bookgrid.innerHTML += `
-    <div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div class="w-full bg-white border border-gray-200 rounded-lg shadow">
             <a href="#" class="flex flex-col items-center mx-4 ">
               <img class=" h-72 mx-auto  " src="${book.image}"  />
               <div class="p-5 text-center sm:text-left">
